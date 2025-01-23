@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stock Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        form {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input[type="text"] {
+            width: 200px;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+        input[type="submit"] {
+            margin-top: 10px;
+            padding: 8px 15px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Student Verification Forms</h1>
+    
+    <h2>POST Form</h2>
+    <p>Submit your information to verify your student status.</p>
+    <form action="https://slidespace.icu/student" method="POST">
+        <label for="first_name">First Name:</label>
+        <input type="text" name="first_name" required>
+        
+        <label for="last_name">Last Name:</label>
+        <input type="text" name="last_name" required>
+        
+        <label for="student_id">Student ID:</label>
+        <input type="text" name="student_id" required>
+        
+        <input type="submit" value="Submit">
+    </form>
+
+    <h2>PUT Form</h2>
+    <p>Update your student information.</p>
+    <form action="https://slidespace.icu/api/studentfetch" method="PUT">
+        <label for="first_name">First Name:</label>
+        <input type="text" name="first_name" required>
+        
+        <label for="last_name">Last Name:</label>
+        <input type="text" name="last_name" required>
+        
+        <label for="student_id">Student ID:</label>
+        <input type="text" name="student_id" required>
+        
+        <input class="btn" type="submit" value="Submit">
+    </form>
+
+    <h2>Results: <span class='results'></span></h2>
+    <script src='/static/js/slidespace.js'></script>
+</body>
+</html>
