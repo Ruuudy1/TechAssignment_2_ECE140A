@@ -114,7 +114,7 @@ async def serve_stock_page(request: Request):
 async def get_stock_data(stock_id: int):
     if stock_id not in stock_data:
         return JSONResponse(
-            status_code=404,
+            status_code=200,
             content={"message": "No data available for this stock."}
         )
     return JSONResponse(content=stock_data[stock_id])
