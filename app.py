@@ -41,4 +41,4 @@ def puppy_pong_page(request: Request):
     return HTMLResponse(content=html_content, status_code=200)
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=6543, reload=True)
+    uvicorn.run(app, host="0.0.0.0", port=6543)
