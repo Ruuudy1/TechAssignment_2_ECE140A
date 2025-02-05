@@ -4,15 +4,24 @@
     <meta charset="UTF-8">
     <title>My Library</title>
     <style>
+        body {
+            background-color: #fff3d4;
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
         .book-container {
             border: 1px solid #ccc;
             margin: 10px;
-            padding: 10px;
+            padding: 15px;
         }
     </style>
 </head>
 <body>
     <h1>My Borrowed Books</h1>
+    <form id="returnForm">
+        <input type="text" id="bookId" placeholder="Enter Book ID">
+        <input type="submit" value="Return Book">
+    </form>
     <div id="myBooks"></div>
     <script src="/static/js/my_library.js"></script>
 </body>

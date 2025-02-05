@@ -5,14 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather Checker</title>
     <style>
+        body {
+            background-color: #fff3d4;
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        form {
+            margin: 20px 0;
+        }
         .info {
             margin: 20px;
             padding: 20px;
             border: 1px solid #ccc;
-        }
-        img {
-            max-width: 300px;
-            margin: 10px 0;
         }
     </style>
 </head>
@@ -21,7 +25,7 @@
     <form id="weatherForm">
         <label for="cityInput">Enter City Name:</label>
         <input type="text" id="cityInput" name="city" required>
-        <button type="submit">Get Weather</button>
+        <input type="submit" value="Get Weather">
     </form>
     <div class="info"></div>
     <script src="/static/js/weather.js"></script>

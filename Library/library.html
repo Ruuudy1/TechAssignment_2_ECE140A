@@ -4,26 +4,31 @@
     <meta charset="UTF-8">
     <title>Library</title>
     <style>
+        body {
+            background-color: #fff3d4;
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .search-container {
+            margin: 20px 0;
+        }
         .book-container {
             border: 1px solid #ccc;
             margin: 10px;
-            padding: 10px;
-        }
-        .hidden {
-            display: none;
+            padding: 15px;
         }
     </style>
 </head>
 <body>
-    <h1>Library Search</h1>
+    <h1>Book Query</h1>
     <form id="searchForm">
-        <select id="searchType">
+        <input type="text" id="searchInput" placeholder="Enter search term">
+        <select id="searchType" required>
             <option value="">Select search type</option>
             <option value="books">Book ID</option>
             <option value="authors">Author</option>
         </select>
-        <input type="text" id="searchInput" placeholder="Enter search term">
-        <button type="submit">Search</button>
+        <input type="submit" value="Search">
     </form>
     <div id="results"></div>
     <script src="/static/js/rest.js"></script>

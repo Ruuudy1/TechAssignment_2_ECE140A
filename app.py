@@ -81,6 +81,16 @@ async def startup_event():
     with open("static/books.json", "r") as f:
         library_inventory = json.load(f)
 
+@app.post("/books")
+async def create_book(request: Request):
+    try:
+        book_data = await request.json()
+        library_inventory.append(book_data)
+        return JSONResponse(content=book_data, status_code=200)
+    except Exception as e:
+        return JSONResponse(content={"error": str(e)}, status_code=400)
+
+
 @app.get("/library", response_class=HTMLResponse)
 async def library_page(request: Request):
     file_path = os.path.join(os.path.dirname(__file__), "Library", "library.html")
