@@ -13,12 +13,12 @@ create table courses (
     quarter varchar(50)
 );
 
--- create course_schedule table
+-- create course_schedule table with role as varchar
 create table course_schedule (
     id int auto_increment primary key,
     name varchar(100),
     course varchar(255),
-    role enum('student', 'instructional assistant'),
+    role varchar(50),
     week_day varchar(100)
 );
 
