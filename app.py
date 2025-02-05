@@ -13,6 +13,8 @@ from fastapi.staticfiles import StaticFiles
 library_inventory = []
 my_inventory = {}
 
+
+
 # Load books from JSON file
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -24,6 +26,10 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(lifespan=lifespan)
 app.mount("/static", StaticFiles(directory="static"), name="static")
+
+@app.get("/book")
+async def get_all_books():
+    return JSONResponse(content=library_inventory)
 
 @app.get("/", response_class=Response)
 def get_hello() -> Response:
@@ -70,21 +76,6 @@ async def weather_page(request: Request):
 ############################################################################################################
 #########################Challenge 2 of tech assignment 3###################################################
 ############################################################################################################
-# Global dictionaries for book storage
-library_inventory = []
-my_inventory = {}
-
-# Load books from JSON file
-@app.on_event("startup")
-async def startup_event():
-    global library_inventory
-    with open("static/books.json", "r") as f:
-        library_inventory = json.load(f)
-
-# Return all books for empty search
-@app.get("/book")
-async def get_all_books():
-    return JSONResponse(content=library_inventory)
 
 @app.post("/books")
 async def create_book(request: Request):
