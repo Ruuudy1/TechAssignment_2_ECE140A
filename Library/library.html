@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Library</title>
+    <style>
+        .book-container {
+            border: 1px solid #ccc;
+            margin: 10px;
+            padding: 10px;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Library Search</h1>
+    <form id="searchForm">
+        <select id="searchType">
+            <option value="">Select search type</option>
+            <option value="books">Book ID</option>
+            <option value="authors">Author</option>
+        </select>
+        <input type="text" id="searchInput" placeholder="Enter search term">
+        <button type="submit">Search</button>
+    </form>
+    <div id="results"></div>
+    <script src="/static/js/rest.js"></script>
+</body>
+</html>
