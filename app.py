@@ -81,6 +81,11 @@ async def startup_event():
     with open("static/books.json", "r") as f:
         library_inventory = json.load(f)
 
+# Return all books for empty search
+@app.get("/book")
+async def get_all_books():
+    return JSONResponse(content=library_inventory)
+
 @app.post("/books")
 async def create_book(request: Request):
     try:
@@ -89,7 +94,6 @@ async def create_book(request: Request):
         return JSONResponse(content=book_data, status_code=200)
     except Exception as e:
         return JSONResponse(content={"error": str(e)}, status_code=400)
-
 
 @app.get("/library", response_class=HTMLResponse)
 async def library_page(request: Request):
@@ -128,7 +132,6 @@ async def update_book_status(book_id: int):
         return JSONResponse(content={"error": "Book not found"}, status_code=404)
     if book["status"] == "borrowed":
         return JSONResponse(content={"error": "Book already borrowed"}, status_code=400)
-    
     book["status"] = "borrowed"
     my_inventory[book_id] = book.copy()
     return JSONResponse(content=book)
@@ -137,11 +140,9 @@ async def update_book_status(book_id: int):
 async def return_book(book_id: int):
     if book_id not in my_inventory:
         return JSONResponse(content={"error": "Book not in your inventory"}, status_code=404)
-    
     book = next((book for book in library_inventory if book["book_id"] == book_id), None)
     if book:
         book["status"] = "not borrowed"
-    
     del my_inventory[book_id]
     return JSONResponse(content={"message": "Book returned successfully"})
 

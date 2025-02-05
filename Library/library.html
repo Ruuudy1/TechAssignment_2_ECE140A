@@ -1,36 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
     <title>Library</title>
     <style>
-        body {
-            background-color: #fff3d4;
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        .search-container {
-            margin: 20px 0;
-        }
-        .book-container {
-            border: 1px solid #ccc;
-            margin: 10px;
-            padding: 15px;
-        }
+      body { background-color: #fff3d4; font-family: Arial, sans-serif; margin: 20px; }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <h1>Book Query</h1>
+    <!-- One search form with exactly one submit button -->
     <form id="searchForm">
-        <input type="text" id="searchInput" placeholder="Enter search term">
-        <select id="searchType" required>
-            <option value="">Select search type</option>
-            <option value="books">Book ID</option>
-            <option value="authors">Author</option>
-        </select>
-        <input type="submit" value="Search">
+      <input type="text" id="searchInput" placeholder="Enter search term">
+      <select id="searchType" required>
+        <option value="">Select search type</option>
+        <option value="books">Book ID</option>
+        <option value="authors">Author</option>
+      </select>
+      <input type="submit" value="Search">
     </form>
     <div id="results"></div>
     <script src="/static/js/rest.js"></script>
-</body>
+  </body>
 </html>
