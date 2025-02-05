@@ -2,32 +2,28 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather Checker</title>
     <style>
         body {
             background-color: #fff3d4;
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        form {
-            margin: 20px 0;
         }
         .info {
             margin: 20px;
             padding: 20px;
-            border: 1px solid #ccc;
         }
     </style>
 </head>
 <body>
     <h1>Weather Checker</h1>
     <form id="weatherForm">
-        <label for="cityInput">Enter City Name:</label>
         <input type="text" id="cityInput" name="city" required>
         <input type="submit" value="Get Weather">
     </form>
-    <div class="info"></div>
+    <span class="info">
+        <p id="location"></p>
+        <p id="temperature"></p>
+        <p id="conditions"></p>
+    </span>
     <script src="/static/js/weather.js"></script>
 </body>
 </html>

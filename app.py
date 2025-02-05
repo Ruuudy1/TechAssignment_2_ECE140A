@@ -81,6 +81,11 @@ async def startup_event():
     with open("static/books.json", "r") as f:
         library_inventory = json.load(f)
 
+@app.get("/book")
+async def get_all_books():
+    return JSONResponse(content=library_inventory)
+
+
 @app.post("/books")
 async def create_book(request: Request):
     try:
@@ -119,15 +124,19 @@ async def get_books_by_author(author_name: str):
 
 @app.put("/books/{book_id}")
 async def update_book_status(book_id: int):
-    book = next((book for book in library_inventory if book["book_id"] == book_id), None)
-    if not book:
-        return JSONResponse(content={"error": "Book not found"}, status_code=404)
-    if book["status"] == "borrowed":
-        return JSONResponse(content={"error": "Book already borrowed"}, status_code=400)
-    
-    book["status"] = "borrowed"
-    my_inventory[book_id] = book.copy()
-    return JSONResponse(content=book)
+    try:
+        book = next((book for book in library_inventory if book["book_id"] == book_id), None)
+        if not book:
+            return JSONResponse(content={"error": "Book not found"}, status_code=404)
+        
+        if book["status"] == "borrowed":
+            return JSONResponse(content={"error": "Book already borrowed"}, status_code=400)
+        
+        book["status"] = "borrowed"
+        my_inventory[book_id] = book.copy()
+        return JSONResponse(content=book)
+    except Exception as e:
+        return JSONResponse(content={"error": str(e)}, status_code=500)
 
 @app.delete("/books/{book_id}")
 async def return_book(book_id: int):

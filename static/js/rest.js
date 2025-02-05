@@ -1,48 +1,34 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const searchForm = document.getElementById('searchForm');
     const resultsDiv = document.getElementById('results');
 
-    searchForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
+    window.searchBooks = async () => {
         const searchType = document.getElementById('searchType').value;
         const searchInput = document.getElementById('searchInput').value;
 
-        if (!searchType) {
-            alert('Please select a search type');
-            return;
-        }
-
         try {
             let url;
-            if (searchInput.trim() === '') {
-                url = '/books/all';
-            } else if (searchType === 'books') {
+            if (!searchInput.trim()) {
+                url = '/book';  // endpoint for all books
+            } else if (searchType === 'Book ID') {
                 url = `/books/${searchInput}`;
-            } else {
+            } else if (searchType === 'Author') {
                 url = `/authors/${encodeURIComponent(searchInput)}`;
             }
 
             const response = await fetch(url);
             const data = await response.json();
-
-            if (!data || (Array.isArray(data) && data.length === 0)) {
-                alert('No books found');
-                return;
-            }
-
             displayBooks(Array.isArray(data) ? data : [data]);
         } catch (error) {
-            console.error('Error:', error);
-            alert('Error searching for books');
+            resultsDiv.innerHTML = '<p>Error searching for books</p>';
         }
-    });
+    };
 
     function displayBooks(books) {
         resultsDiv.innerHTML = '';
         books.forEach(book => {
-            const bookElement = document.createElement('div');
-            bookElement.className = 'book-container';
-            bookElement.innerHTML = `
+            const bookDiv = document.createElement('div');
+            bookDiv.className = 'book-container';
+            bookDiv.innerHTML = `
                 <p>ID: ${book.book_id}</p>
                 <p>Title: ${book.title}</p>
                 <p>Author: ${book.author}</p>
@@ -53,24 +39,26 @@ document.addEventListener('DOMContentLoaded', () => {
                     `<button onclick="borrowBook(${book.book_id})">Borrow</button>` : 
                     ''}
             `;
-            resultsDiv.appendChild(bookElement);
+            resultsDiv.appendChild(bookDiv);
         });
     }
 
     window.borrowBook = async (bookId) => {
         try {
             const response = await fetch(`/books/${bookId}`, {
-                method: 'PUT'
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
             });
-            if (response.ok) {
-                const bookElement = document.querySelector(`[data-book-id="${bookId}"]`);
-                bookElement.querySelector('button').remove();
-                bookElement.querySelector('.status').textContent = 'Status: borrowed';
-            } else {
-                alert('Error borrowing book');
+            
+            if (!response.ok) {
+                throw new Error('Failed to borrow book');
             }
+            
+            const data = await response.json();
+            searchBooks(); // Refresh the book list
         } catch (error) {
-            console.error('Error:', error);
             alert('Error borrowing book');
         }
     };
