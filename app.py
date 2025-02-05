@@ -29,7 +29,7 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 
 @app.get("/book")
 async def get_all_books():
-    return JSONResponse(content=library_inventory)
+    return JSONResponse(content=library_inventory, status_code=200)
 
 @app.get("/", response_class=Response)
 def get_hello() -> Response:
