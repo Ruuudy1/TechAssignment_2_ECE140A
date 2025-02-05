@@ -7,7 +7,7 @@ create table courses (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100),
     course_title VARCHAR(255),
-    course_number INT,
+    course_number VARCHAR(50),
     department_name VARCHAR(100),
     instructor VARCHAR(100),
     quarter VARCHAR(50)
