@@ -1,10 +1,10 @@
 [
-    {
-      "book_id": 1,
-      "title": "To Kill a Mockingbird",
-      "author": "Harper Lee",
-      "genre": "Novel",
-      "year": 1960,
-      "status": "not borrowed"
-    }
-  ]
+  {
+    "book_id": 1,
+    "title": "To Kill a Mockingbird",
+    "author": "Harper Lee",
+    "genre": "Novel",
+    "year": 1960,
+    "status": "not borrowed"
+  }
+]

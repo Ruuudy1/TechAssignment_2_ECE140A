@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.getElementById('searchInput').value;
     let url;
     if (searchInput.trim() === "") {
-      url = '/book';
+      url = '/books';
     } else if (searchType === 'books') {
       url = `/books/${searchInput}`;
     } else if (searchType === 'authors') {
