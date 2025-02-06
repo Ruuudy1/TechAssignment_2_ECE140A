@@ -29,7 +29,7 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 
 @app.get("/book")
 async def get_all_books():
-    return JSONResponse(content=library_inventory, status_code=200))
+    return JSONResponse(content=library_inventory, status_code=200)
 
 @app.post("/books")
 async def get_all_books():
@@ -118,7 +118,7 @@ async def get_book(book_id: int):
 @app.get("/authors/{author_name}")
 async def get_books_by_author(author_name: str):
     books = [book for book in library_inventory if author_name.lower() in book["author"].lower()]
-    return JSONResponse(content=books, status_code=200))
+    return JSONResponse(content=books, status_code=200)
 
 @app.put("/books/{book_id}")
 async def update_book_status(book_id: int):
@@ -139,7 +139,7 @@ async def return_book(book_id: int):
     if book:
         book["status"] = "not borrowed"
     del my_inventory[book_id]
-    return JSONResponse(content={"message": "Book returned successfully"}, status_code=200))
+    return JSONResponse(content={"message": "Book returned successfully"}, status_code=200)
 
 ############################################################################################################
 ############################################################################################################
