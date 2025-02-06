@@ -21,7 +21,7 @@ create table course_schedule (
     name varchar(100),
     course varchar(255),
     role varchar(50) CHECK(role = 'student' OR role = 'instructional assistant'),
-    week_day varchar(100) CHECK(role = 'monday' OR role = 'tuesday' OR role = 'wednesday' OR role = 'thursday' OR role = 'friday')
+    week_day varchar(100) CHECK(week_day = 'monday' OR week_day = 'tuesday' OR week_day = 'wednesday' OR week_day = 'thursday' OR week_day = 'friday')
 );
 
 -- Insert sample data into courses
