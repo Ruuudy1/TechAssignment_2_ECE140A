@@ -106,7 +106,7 @@ async def my_library_page(request: Request):
 
 @app.get("/my-inventory")
 async def get_my_inventory():
-    return JSONResponse(content=my_inventory, status_code=200))
+    return JSONResponse(content=my_inventory, status_code=200)
 
 @app.get("/books/{book_id}")
 async def get_book(book_id: int):
