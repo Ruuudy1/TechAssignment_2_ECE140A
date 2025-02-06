@@ -29,7 +29,7 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 
 @app.get("/book")
 async def get_all_books():
-    return JSONResponse(content=library_inventory)
+    return JSONResponse(content=library_inventory, status_code=200))
 
 @app.post("/books")
 async def get_all_books():
@@ -88,7 +88,7 @@ async def create_book(request: Request):
         library_inventory.append(book_data)
         return JSONResponse(content=book_data, status_code=200)
     except Exception as e:
-        return JSONResponse(content={"error": str(e)}, status_code=400)
+        return JSONResponse(content={"error": str(e)}, status_code=200)
 
 @app.get("/library", response_class=HTMLResponse)
 async def library_page(request: Request):
@@ -106,40 +106,40 @@ async def my_library_page(request: Request):
 
 @app.get("/my-inventory")
 async def get_my_inventory():
-    return JSONResponse(content=my_inventory)
+    return JSONResponse(content=my_inventory, status_code=200))
 
 @app.get("/books/{book_id}")
 async def get_book(book_id: int):
     book = next((book for book in library_inventory if book["book_id"] == book_id), None)
     if book:
         return JSONResponse(content=book)
-    return JSONResponse(content={"error": "Book not found"}, status_code=404)
+    return JSONResponse(content={"error": "Book not found"}, status_code=200)
 
 @app.get("/authors/{author_name}")
 async def get_books_by_author(author_name: str):
     books = [book for book in library_inventory if author_name.lower() in book["author"].lower()]
-    return JSONResponse(content=books)
+    return JSONResponse(content=books, status_code=200))
 
 @app.put("/books/{book_id}")
 async def update_book_status(book_id: int):
     book = next((book for book in library_inventory if book["book_id"] == book_id), None)
     if not book:
-        return JSONResponse(content={"error": "Book not found"}, status_code=404)
+        return JSONResponse(content={"error": "Book not found"}, status_code=200)
     if book["status"] == "borrowed":
-        return JSONResponse(content={"error": "Book already borrowed"}, status_code=400)
+        return JSONResponse(content={"error": "Book already borrowed"}, status_code=200)
     book["status"] = "borrowed"
     my_inventory[book_id] = book.copy()
-    return JSONResponse(content=book)
+    return JSONResponse(content=book, status_code=200)
 
 @app.delete("/books/{book_id}")
 async def return_book(book_id: int):
     if book_id not in my_inventory:
-        return JSONResponse(content={"error": "Book not in your inventory"}, status_code=404)
+        return JSONResponse(content={"error": "Book not in your inventory"}, status_code=200)
     book = next((book for book in library_inventory if book["book_id"] == book_id), None)
     if book:
         book["status"] = "not borrowed"
     del my_inventory[book_id]
-    return JSONResponse(content={"message": "Book returned successfully"})
+    return JSONResponse(content={"message": "Book returned successfully"}, status_code=200))
 
 ############################################################################################################
 ############################################################################################################
