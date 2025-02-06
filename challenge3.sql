@@ -20,7 +20,7 @@ create table course_schedule (
     id int auto_increment primary key,
     name varchar(100),
     course varchar(255),
-    role varchar(50) CHECK(role = "student" OR role = "instructional assistant"),
+    role varchar(50) CHECK(role = 'student' OR role = 'instructional assistant'),
     week_day varchar(100)
 );
 
